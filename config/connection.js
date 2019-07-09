@@ -14,3 +14,5 @@ connection.connect(function(err) {
 
   console.log("connected on thread id: " + connection.treadId);
 });
+
+module.exports = connection;

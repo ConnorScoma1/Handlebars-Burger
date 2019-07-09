@@ -12,7 +12,7 @@ var orm = {
     });
   },
 
-  insertOne: function(table, cols, cals, cb) {
+  insertOne: function(table, cols, cols, cb) {
     var dbQuery =
       "INSERT INTO " +
       table +
@@ -28,7 +28,37 @@ var orm = {
       if (err) {
         throw err;
       }
-      cd(res);
+      cb(res);
+    });
+  },
+
+  updateOne: function(table, objColVals, condition, cb) {
+    var dbQuery =
+      "UPDATE " +
+      table +
+      " SET " +
+      translateSql(objColVals) +
+      " WHERE " +
+      condition;
+
+    console.log(dbQuery);
+    connection.query(dbQuery, vals, function(err, res) {
+      if (err) {
+        throw err;
+      }
+      cb(res);
+    });
+  },
+
+  deleteOne: function(table, condition, cb) {
+    var dbQuery = "DELETE FROM " + table + " WHERE " + condition;
+
+    console.log(dbQuery);
+    connection.query(dbQuery, vals, function(err, res) {
+      if (err) {
+        throw err;
+      }
+      cb(res);
     });
   }
 };
