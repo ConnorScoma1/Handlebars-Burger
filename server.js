@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// var routes = require("./controller/burger_controller.js");
-// app.use(routes);
+var routes = require("./controller/burger_controller.js");
+app.use(routes);
 
 app.listen(PORT, () => {
   console.log("server is live on http://localhost:" + PORT);

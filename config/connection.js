@@ -12,7 +12,7 @@ connection.connect(function(err) {
     console.log("error " + err.stack);
   }
 
-  console.log("connected on thread id: " + connection.treadId);
+  console.log("connected on thread id: " + connection.threadId);
 });
 
 module.exports = connection;

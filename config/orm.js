@@ -32,7 +32,7 @@ var orm = {
       if (err) {
         throw err;
       }
-      cd(res);
+      cb(res);
     });
   },
 
