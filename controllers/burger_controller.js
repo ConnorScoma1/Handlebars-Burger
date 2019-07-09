@@ -12,9 +12,11 @@ router.get("/", function(req, res) {
     res.render("index", hdbrsObj);
   });
 
+});
+
   router.post("/api/burgers", function(req, res) {
     burger.insertOne(
-      ["burger_name", "devoured"],
+      ["burger_name", "eat"],
       [req.body.burger_name, req.body.eat],
       function(result) {
         // Send back the ID of new burger
@@ -48,5 +50,4 @@ router.get("/", function(req, res) {
       }
     });
   });
-});
 module.exports = router;
