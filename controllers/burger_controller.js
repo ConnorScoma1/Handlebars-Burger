@@ -1,5 +1,3 @@
-// Router Controller
-// All Router Connections & Endpoints
 var express = require("express");
 var burger = require("../models/burger");
 
@@ -7,7 +5,6 @@ var router = express.Router();
 
 router.get("/", function(req, res) {
   burger.selectAll(function(data) {
-    // Handlesbars Object Holding Data
     var hdbrsObj = {
       burgers: data
     };
@@ -17,39 +14,39 @@ router.get("/", function(req, res) {
 
   router.post("/api/burgers", function(req, res) {
     burger.insertOne(
-      ["burger_name", "eat"],
+      ["burger_name", "devoured"],
       [req.body.burger_name, req.body.eat],
       function(result) {
-        res.json({ id: result.inserId });
+        // Send back the ID of new burger
+        res.json({ id: result.insertId });
       }
     );
   });
-
   router.put("/api/burgers/:id", function(req, res) {
-    var condition = "id =" + req.params.id;
+    var condition = "id = " + req.params.id;
 
-    cosnole.log("condition ", condition);
-    burger.updateOne({ eat: req.body.eat }, condition, function(result) {
-      if ((result, changedRows === 0)) {
+    console.log("condition", condition);
+    burger.updateOne({ eat: req.body.eat }, condition, function(
+      result
+    ) {
+      if (result.changedRows === 0) {
         return res.status(404).end();
       } else {
-        return status(200).end();
+        res.status(200).end();
       }
     });
   });
-
-  router.deleteOne(condition, function(req, res) {
+  router.delete("/api/burgers/:id", function(req, res) {
     var condition = "id = " + req.params.id;
     console.log("condition", condition);
 
     burger.deleteOne(condition, function(result) {
-      if ((result, changedRows === 0)) {
+      if (result.changedRows === 0) {
         return res.status(404).end();
       } else {
-        return status(200).end();
+        res.status(200).end();
       }
     });
   });
 });
-
 module.exports = router;

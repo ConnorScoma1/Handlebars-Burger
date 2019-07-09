@@ -1,16 +1,14 @@
 var connection = require("../config/connection");
 
-// Helper Functions
 function createQmarks(num) {
   var arr = [];
-  for (var i = 0; i < num.length; i++) {
+  for (var i = 0; i < num; i++) {
     arr.push("?");
   }
-
   return arr.toString();
 }
 
-function translateSql(obj) {
+function translateSql(ob) {
   var arr = [];
   for (var key in ob) {
     var value = ob[key];
@@ -35,14 +33,13 @@ var orm = {
       cb(res);
     });
   },
-
-  insertOne: function(table, cols, cols, cb) {
+  insertOne: function(table, cols, vals, cb) {
     var dbQuery =
       "INSERT INTO " +
       table +
       " (" +
       cols.toString() +
-      ")" +
+      ") " +
       "VALUES (" +
       createQmarks(vals.length) +
       ") ";
@@ -55,7 +52,6 @@ var orm = {
       cb(res);
     });
   },
-
   updateOne: function(table, objColVals, condition, cb) {
     var dbQuery =
       "UPDATE " +
@@ -66,19 +62,19 @@ var orm = {
       condition;
 
     console.log(dbQuery);
-    connection.query(dbQuery, vals, function(err, res) {
+
+    connection.query(dbQuery, function(err, res) {
       if (err) {
         throw err;
       }
       cb(res);
     });
   },
-
   deleteOne: function(table, condition, cb) {
     var dbQuery = "DELETE FROM " + table + " WHERE " + condition;
-
     console.log(dbQuery);
-    connection.query(dbQuery, vals, function(err, res) {
+
+    connection.query(dbQuery, function(err, res) {
       if (err) {
         throw err;
       }
@@ -86,5 +82,4 @@ var orm = {
     });
   }
 };
-
 module.exports = orm;
