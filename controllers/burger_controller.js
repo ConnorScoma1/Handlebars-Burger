@@ -5,11 +5,11 @@ var router = express.Router();
 
 router.get("/", function(req, res) {
   burger.selectAll(function(data) {
-    var hdbrsObj = {
+    var handleBarsObj = {
       burgers: data
     };
-    console.log(hdbrsObj);
-    res.render("index", hdbrsObj);
+    console.log(handleBarsObj);
+    res.render("index", handleBarsObj);
   });
 
 });
